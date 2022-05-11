@@ -1,0 +1,110 @@
+100 Bob Blue Alarcon -246422 5265 7035 Mayo 41036
+200 Steve Green Alarcon -44102 3233 906 Abad Gordillo 41085
+300 Pam White Alfaro 69946 1949 4778 Abades 41066
+400 Sam Red Alfaro -283356 3239 4321 Abedul 41085
+500 Sue Yellow Arenas -123328 5529 6967 Abel 41039
+600 Will Black Arenas 110847 1545 4564 Abel martin 41079
+700 Ed Purple Ballesteros -56666 2453 5143 Abeto 41081
+800 Antonio Garcia Ballesteros 270894 5104 4588 Abogado rafael medina 41030
+900 Jose Martinez Black 93697 3483 1043 Abril 41061
+1000 Francisco Lopez Blazquez 191750 4859 8993 Abulcasis 41073
+1100 Juan Sanchez Blazquez 115473 8382 1140 Abuyacub 41072
+1200 Manuel Gonzalez Blue 208063 3146 9192 Acanto 41069
+1300 Pedro Gomez Calero 168926 8697 1873 Acebo 41064
+1400 Jesus Fernandez Calero 84695 5300 1698 Acebuchal 41036
+1500 Angel Moreno Cano 175142 6709 9525 Acebuche 41025
+1600 Miguel Jimenez Cano -138400 9917 1590 Acedia 41044
+1700 Javier Perez Castillo -220631 5430 1481 Aceituneras 41072
+1800 Jose antonio Rodriguez Castillo 85588 9252 5832 Aceituno 41052
+1900 David Navarro Cebrian -255951 7722 664 Acero p.i.Calonge 41080
+2000 Carlos Ruiz Cebrian -280071 3367 3489 Acetres 41044
+2100 Jose luis Diaz Collado 7201 4814 3284 Acordeon 41031
+2200 Alejandro Serrano Collado -15106 6983 900 Acuario 41007
+2300 Miguel angel Hernandez Corcoles 151962 2914 9478 Acueducto 41058
+2400 Francisco javierMuñoz Corcoles -135556 8695 4775 Acustica 41090
+2500 Rafael Saez Cuenca 193980 8680 2259 Ada 41077
+2600 Daniel Romero Cuenca -184457 7399 5797 Zurraque 41060
+2700 Juan jose Rubio Diaz -292131 1491 222 Zurradores 41077
+2800 Luis Alfaro Diaz 147261 4085 565 Zurcidoras 41066
+2900 Pablo Molina Fernandez 37675 4617 6706 Zurbaran 41080
+3000 Juan antonio Lozano Fernandez -218654 7320 2560 Zumaque 41064
+3100 Joaquin Castillo Garcia 87677 8568 2025 Zorzal 41074
+3200 Sergio Picazo Garcia 282442 5384 1307 Zorro 41051
+3300 Fernando Ortega Garrido -6307 4720 3262 Zorrilla 41039
+3400 Juan carlos Morcillo Garrido 265747 408 805 Zoologia 41040
+3500 Andres Cano Gil 3832 4528 8326 Zodiaco 41056
+3600 Jose manuel Marin Gil -97034 5143 3367 Zocodover 41009
+3700 Jose maria Cuenca Gomez 58539 5431 9488 Zinc p.i.Calonge 41004
+3800 Ramon Garrido Gomez -251581 9724 7910 Zeus 41084
+3900 Raul Torres Gonzalez -114168 1691 942 Zenobia camprubi 41058
+4000 Alberto Corcoles Gonzalez -43342 9827 7494 Zarza 41079
+4100 Enrique Gil Green 97677 522 2457 Zaragoza 41068
+4200 Alvaro Ortiz Hernandez 191130 2493 6989 Zapote 41092
+4300 Vicente Calero Hernandez 270177 2225 9115 Zapillo 41027
+4400 Emilio Valero Jimenez 160358 4144 822 Zapardiel 41060
+4500 Francisco jose Cebrian Jimenez 190043 4271 6363 Zamudio 41054
+4600 Diego Rodenas Lopez -8638 3531 865 Zamora 41085
+4700 Julian Alarcon Lopez 70104 2190 9403 Zafra 41019
+4800 Jorge Blazquez Lozano 435 1470 2083 Zafiro 41004
+4900 Alfonso Nuñez Lozano -132677 3669 356 Zacarias zulategui 41072
+5000 Adrian Pardo Marin -205160 4850 1701 Yuste 41001
+5100 Ruben Moya Marin -236819 5552 905 Zurcidoras 41039
+5200 Santiago Tebar Martinez 93023 1953 6410 Zurbaran 41052
+5300 Ivan Requena Martinez 233589 1548 4383 Zumaque 41034
+5400 Juan manuel Arenas Molina -165028 5335 9448 Zorzal 41036
+5500 Pascual Ballesteros Molina 72476 8042 6200 Viriato 41045
+5600 Jose miguel Collado Morcillo 275295 9193 6903 Virgilio mattoni 41077
+5700 Mario Ramirez Morcillo 83346 4832 494 Virgilio 41022
+5800 Maria Garcia Moreno 236607 8286 7687 Virgenes 41051
+5900 Maria carmen Martinez Moreno 188966 7890 9800 Virgen milagrosa 41054
+6000 Josefa Lopez Moya 148111 958 2549 Virgen mediadora 41055
+6100 Isabel Sanchez Moya 195320 8579 4118 Virgen inmaculada 41024
+6200 Maria dolores Gonzalez Muñoz 294260 3763 7929 Virgen del valle 41080
+6300 Carmen Gomez Muñoz -73927 8044 4182 Virgen del subterraneo 41001
+6400 Francisca Fernandez Navarro 281248 4068 9618 Virgen del sol 41052
+6500 Maria pilar Moreno Navarro 288676 1535 4021 Virgen del sagrado corazon 41082
+6600 Dolores Jimenez Nuñez -282139 6144 1395 Virgen del refugio 41017
+6700 Maria jose Perez Nuñez -41370 5789 5596 Virgen del prado 41090
+6800 Antonia Rodriguez Ortega -134867 9868 4616 Virgen del pino 41073
+6900 Ana Navarro Ortega -213996 3881 4915 Virgen del pilar 41007
+7000 Maria isabel Ruiz Ortiz -259742 5638 9058 Virgen del perpetuo socorro 41015
+7100 Maria angelesDiaz Ortiz 21419 939 6844 Virgen del patrocinio 41044
+7200 Pilar Serrano Pardo -105282 3900 3010 Virgen del monte 41024
+7300 Ana maria Hernandez Pardo 257771 3518 5772 Virgen del mayor dolor 41054
+7400 Lucia Muñoz Perez -95125 2016 6558 Virgen del mar 41057
+7500 Cristina Saez Perez -113688 914 7943 Virgen del dulce nombre 41046
+7600 Laura Romero Picazo -35675 4551 7428 Virgen del carmen dolorosa 41062
+7700 Encarnacion Rubio Picazo -43212 9282 8670 Virgen del carmen 41063
+7800 Juana Alfaro Purple -235177 5674 7995 Virgen del buen aire 41016
+7900 Maria teresa Molina Ramirez -60875 7250 7880 Virgen del aguila 41056
+8000 Rosario Lozano Ramirez -156951 1960 3763 Virgen de villadiego 41014
+8100 Elena Castillo Red 88167 3129 8266 Virgen de valvanera 41027
+8200 Marta Picazo Requena -79126 9819 8490 Virgen de valme 41059
+8300 Manuela Ortega Requena 261061 2191 7031 Virgen de todos los santos 41033
+8400 Rosa maria Morcillo Rodenas -152032 7869 2036 Virgen de soterraña 41031
+8500 Maria llanos Cano Rodenas 35134 4841 711 Virgen de setefilla 41073
+8600 Maria josefa Marin Rodriguez 292835 9377 8370 Virgen de robledo 41043
+8700 Raquel Cuenca Rodriguez -282403 2095 7932 Virgen de regla 41031
+8800 Angeles Garrido Romero 260719 9092 7348 Virgen de montserrat 41016
+8900 Concepcion Torres Romero -182559 1864 5542 Virgen de lujan 41019
+9000 Mercedes Corcoles Rubio -275511 9903 4994 Virgen de lourdes 41086
+9100 Irene Gil Rubio -62091 7625 7695 Virgen de los reyes 41068
+9200 Teresa Ortiz Ruiz -98711 2050 2129 Virgen de los gitanos 41040
+9300 Beatriz Calero Ruiz -56215 4223 7209 Virgen de los dolores 41012
+9400 Paula Valero Saez 95803 3932 4190 Virgen de los buenos libros 41085
+9500 Angela Cebrian Saez -239021 8453 4722 Virgen de loreto 41054
+9600 Julia Rodenas Sanchez -154159 3404 370 Virgen de las torres 41062
+9700 Ana belen Alarcon Sanchez 8633 9112 9069 Virgen de las montañas 41057
+9800 Rocio Blazquez Serrano 31329 9559 1279 Virgen de las lagrimas 41040
+9900 Amparo Nuñez Serrano -208024 3116 3584 Virgen de las huertas 41063
+10000 Alicia Pardo Tebar -9089 444 7135 Virgen de las angustias 41047
+10100 Consuelo Moya Tebar -105544 9201 8492 Virgen de las aguas 41034
+10200 Rosa Tebar Torres -90782 2029 9728 Virgen de la victoria 41008
+10300 Ascension Requena Torres 162678 8469 2143 Virgen de setefilla 41075
+10400 Andrea Arenas Valero   Virgen de robledo 41017
+10500 Maria rosario Ballesteros Valero 186880 6879 4625 Virgen de regla 41050
+10600 Maria jesus Collado White 274546 1972 7042 Virgen de montserrat 41005
+10700 Maria luisa Ramirez Yellow 195571 31 9562 Virgen de lujan 41065
+10800 Maria rosario Ballesteros Valero 0 6879 4625 Virgen de regla 41050
+10900 Maria jesus Collado White 0 1972 1042 Virgen de montserrat 41005
+11000 Maria luisa Ramirez Yellow 0 31 3000 Virgen de lujan 41065
