@@ -3,24 +3,27 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
-
 public abstract class Ficheros {
 
     private static final Calendar fecha = Calendar.getInstance();
-    public static final File SALDOA0 = new File(String.format("Documentos/Saldo0_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File DEBITO = new File(String.format("Documentos/debito_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
-    public static final File CREDITO = new File(String.format("Documentos/Credito_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
-    public static final File ROBINSON = new File(String.format("Documentos/Robinson_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
-    public static final File VIP = new File(String.format("Documentos/VIP_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+    public static final File CLIENTES = new File(String.format("src/Documentos/Clientes_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final File CLIENTESAMP = new File(String.format("src/Documentos/ClientesAmp_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final File SALDOA0 = new File(String.format("src/Documentos/Saldo0_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final File DEBITO = new File(String.format("src/Documentos/debito_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final File CREDITO = new File(String.format("src/Documentos/Credito_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final File ROBINSON = new File(String.format("src/Documentos/Robinson_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final File VIP = new File(String.format("src/Documentos/VIP_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    private static Scanner s;
+
     public static void saldoA0(){
+        Ficheros.leerClientes();
         ObjectInputStream lectura = null;
         ObjectOutputStream salida = null;
         Clientes cliente;
         if (!SALDOA0.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream("Documentos/Clientes.dat"));
-                salida = new ObjectOutputStream(new FileOutputStream(SALDOA0));
+                lectura = new ObjectInputStream(new FileInputStream(String.format("src/Documentos/ClientesAmp_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR))));
+                salida = new ObjectOutputStream(new FileOutputStream(String.format("src/Documentos/Saldo0_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR))));
                 do {
                     cliente = (Clientes) lectura.readObject();
                     if (cliente.getSaldo() == 0) {
@@ -47,12 +50,13 @@ public abstract class Ficheros {
     }
 
     public static void clientesCredito(){
+        Ficheros.leerClientes();
         ObjectInputStream lectura = null;
         ObjectOutputStream salida = null;
         Clientes cliente;
         if (!CREDITO.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream("Documentos/Clientes.dat"));
+                lectura = new ObjectInputStream(new FileInputStream(CLIENTES));
                 salida = new ObjectOutputStream(new FileOutputStream(CREDITO));
                 do {
                     cliente = (Clientes) lectura.readObject();
@@ -80,12 +84,13 @@ public abstract class Ficheros {
     }
 
     public static void clientesDebito(){
+        Ficheros.leerClientes();
         ObjectInputStream lectura = null;
         ObjectOutputStream salida = null;
         Clientes cliente;
         if (!DEBITO.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream("Documentos/Clientes.dat"));
+                lectura = new ObjectInputStream(new FileInputStream(CLIENTES));
                 salida = new ObjectOutputStream(new FileOutputStream(DEBITO));
                 do {
                     cliente = (Clientes) lectura.readObject();
@@ -113,13 +118,14 @@ public abstract class Ficheros {
     }
 
     public static void clientesRobinson(){
+        Ficheros.leerClientesAmpliados();
         int contador=0;
         ObjectInputStream lectura = null;
         ObjectOutputStream salida = null;
         Clientes cliente;
         if (!ROBINSON.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream("Documentos/Clientes.dat"));
+                lectura = new ObjectInputStream(new FileInputStream(CLIENTESAMP));
                 salida = new ObjectOutputStream(new FileOutputStream(ROBINSON));
                 do {
                     cliente = (Clientes) lectura.readObject();
@@ -148,13 +154,14 @@ public abstract class Ficheros {
         }
     }
     public static void clientesVip(){
+        Ficheros.leerClientesAmpliados();
         int contador=0;
         ObjectInputStream lectura = null;
         ObjectOutputStream salida = null;
         Clientes cliente;
         if (!VIP.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream("Documentos/Clientes.dat"));
+                lectura = new ObjectInputStream(new FileInputStream(CLIENTESAMP));
                 salida = new ObjectOutputStream(new FileOutputStream(VIP));
                 do {
                     cliente = (Clientes) lectura.readObject();
@@ -184,39 +191,59 @@ public abstract class Ficheros {
     }
 
     public static Clientes sacarClienteAmpliado(String entrada){
-        String nombre, direccion;
-        Scanner scanner = new Scanner(entrada);
+        String nombre;
+        StringBuilder direccion;
+        s = new Scanner(entrada);
         ClienteAmpliado cliente = new ClienteAmpliado();
-        cliente.setNumCliente(scanner.nextInt());
-        nombre = scanner.next();
-        if (scanner.hasNext("[a-z]+")){
-            nombre += " " + scanner.next();
+        cliente.setNumCliente(s.nextInt());
+        nombre = s.next();
+        if (s.hasNext("[a-z]+")){
+            nombre += " " + s.next();
         }
         cliente.setNombre(nombre);
-        cliente.setApellido1(scanner.next());
-        cliente.setApellido2(scanner.next());
-        cliente.setSaldo(scanner.nextInt());
-        cliente.setIngresosMedios(scanner.nextInt());
-        cliente.setGastosMedios(scanner.nextInt());
-        direccion = scanner.next();
-        while (scanner.hasNext(Pattern.compile("[^0-9]+"))){
-            direccion += " " + scanner.next();
+        cliente.setApellido1(s.next());
+        cliente.setApellido2(s.next());
+        cliente.setSaldo(s.nextInt());
+        cliente.setIngresosMedios(s.nextInt());
+        cliente.setGastosMedios(s.nextInt());
+        direccion = new StringBuilder(s.next());
+        while (s.hasNext(Pattern.compile("[^0-9]+"))){
+            direccion.append(" ").append(s.next());
         }
-        cliente.setDireccion(direccion);
-        cliente.setCodigoPostal(scanner.nextInt());
+        cliente.setDireccion(direccion.toString());
+        cliente.setCodigoPostal(s.nextInt());
         return cliente;
     }
 
-    public static void leer(){
+    public static Clientes sacarCliente(String entrada){
+        String nombre;
+        s = new Scanner(entrada);
+        ClienteAmpliado cliente = new ClienteAmpliado();
+        cliente.setNumCliente(s.nextInt());
+        nombre = s.next();
+        if (s.hasNext("[a-z]+")){
+            nombre += " " + s.next();
+        }
+        cliente.setNombre(nombre);
+        cliente.setApellido1(s.next());
+        cliente.setApellido2(s.next());
+        cliente.setSaldo(s.nextInt());
+        cliente.setIngresosMedios(s.nextInt());
+        cliente.setGastosMedios(s.nextInt());
+        return cliente;
+    }
+
+    public static void leerClientesAmpliados(){
         BufferedReader lectura = null;
         ObjectOutputStream salida = null;
-            String linea;
+        String linea;
+        if (!CLIENTESAMP.exists()) {
             try {
-                lectura = new BufferedReader(new FileReader("Documentos/Clientes.txt"));
-                salida = new ObjectOutputStream(new FileOutputStream("Documentos/Clientes.dat"));
+                lectura = new BufferedReader(new FileReader("src/Documentos/Clientes.txt"));
+                salida = new ObjectOutputStream(new FileOutputStream(String.format("src/Documentos/ClientesAmp_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR))));
                 linea = lectura.readLine();
                 while (linea!=null){
-                    salida.writeObject(sacarClienteAmpliado(linea));
+                    salida.writeObject(sacarCliente(linea));
                     linea = lectura.readLine();
                 }
             } catch (FileNotFoundException e) {
@@ -225,17 +252,50 @@ public abstract class Ficheros {
                 System.out.println("Error al leer del archivo.");
             } finally {
                 try {
-                    if (lectura!=null){
+                    if (lectura != null) {
                         lectura.close();
                     }
-                    if (salida!=null){
+                    if (salida != null) {
                         salida.close();
                     }
                 } catch (IOException e) {
                     System.out.println("Error al cerrar el archivo de lectura.");
                 }
             }
+        }
+    }
 
+    public static void leerClientes(){
+        BufferedReader lectura = null;
+        ObjectOutputStream salida = null;
+        String linea, clientes = "";
+        clientes = clientes.formatted("src/Documentos/Clientes_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+        if (!CLIENTES.exists()) {
+            try {
+                lectura = new BufferedReader(new FileReader("src/Documentos/Clientes.txt"));
+                salida = new ObjectOutputStream(new FileOutputStream(clientes));
+                linea = lectura.readLine();
+                while (linea!=null){
+                    salida.writeObject(sacarCliente(linea));
+                    linea = lectura.readLine();
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("Archivo de lectura no encontrado.");
+            } catch (IOException e) {
+                System.out.println("Error al leer del archivo.");
+            } finally {
+                try {
+                    if (lectura != null) {
+                        lectura.close();
+                    }
+                    if (salida != null) {
+                        salida.close();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error al cerrar el archivo de lectura.");
+                }
+            }
+        }
     }
 
 }

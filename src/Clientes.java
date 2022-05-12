@@ -1,8 +1,6 @@
-import java.time.MonthDay;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.Serializable;
 
-public class Clientes {
+public class Clientes implements Serializable {
 
     public int numCliente;
     public String nombre;
@@ -13,7 +11,7 @@ public class Clientes {
     public int gastosMedios;
 
     public Clientes() {}
-    public Clientes(int numCliente, String nombre, String apellido1, String apellido2, int saldo, int ingresosMedios, int gastosMedios, String direccion, int codigoPostal) {
+    public Clientes(int numCliente, String nombre, String apellido1, String apellido2, int saldo, int ingresosMedios, int gastosMedios) {
         this.numCliente = numCliente;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -77,10 +75,5 @@ public class Clientes {
 
     public void setGastosMedios(int gastosMedios) {
         this.gastosMedios = gastosMedios;
-    }
-
-    public static void main(String[] args) {
-        Calendar fecha = Calendar.getInstance();
-        System.out.println();
     }
 }

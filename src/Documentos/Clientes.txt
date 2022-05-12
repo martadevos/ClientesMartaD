@@ -101,7 +101,7 @@
 10100 Consuelo Moya Tebar -105544 9201 8492 Virgen de las aguas 41034
 10200 Rosa Tebar Torres -90782 2029 9728 Virgen de la victoria 41008
 10300 Ascension Requena Torres 162678 8469 2143 Virgen de setefilla 41075
-10400 Andrea Arenas Valero   Virgen de robledo 41017
+10400 Andrea Arenas Valero 162678 8469 2143 Virgen de robledo 41017
 10500 Maria rosario Ballesteros Valero 186880 6879 4625 Virgen de regla 41050
 10600 Maria jesus Collado White 274546 1972 7042 Virgen de montserrat 41005
 10700 Maria luisa Ramirez Yellow 195571 31 9562 Virgen de lujan 41065

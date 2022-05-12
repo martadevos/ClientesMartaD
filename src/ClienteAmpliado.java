@@ -1,12 +1,14 @@
-public class ClienteAmpliado extends Clientes{
+import java.io.Serializable;
+
+public class ClienteAmpliado extends Clientes implements Serializable {
     public String direccion;
     public int codigoPostal;
     public ClienteAmpliado() {}
 
-    public ClienteAmpliado(int numCliente, String nombre, String apellido1, String apellido2, int saldo, int ingresosMedios, int gastosMedios, String direccion, int codigoPostal, String direccion1, int codigoPostal1) {
-        super(numCliente, nombre, apellido1, apellido2, saldo, ingresosMedios, gastosMedios, direccion, codigoPostal);
-        this.direccion = direccion1;
-        this.codigoPostal = codigoPostal1;
+    public ClienteAmpliado(int numCliente, String nombre, String apellido1, String apellido2, int saldo, int ingresosMedios, int gastosMedios, String direccion, int codigoPostal) {
+        super(numCliente, nombre, apellido1, apellido2, saldo, ingresosMedios, gastosMedios);
+        this.direccion = direccion;
+        this.codigoPostal = codigoPostal;
     }
 
     public String getDireccion() {
