@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.Calendar;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public abstract class Ficheros {
 
@@ -24,7 +22,6 @@ public abstract class Ficheros {
 
     private static ObjectInputStream leer = null;
     private static ObjectOutputStream escribir = null;
-    private static Scanner s;
 
     public static void saldoA0(){
         FicherosClientes.leerClientes();
