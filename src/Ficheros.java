@@ -6,296 +6,185 @@ import java.util.regex.Pattern;
 public abstract class Ficheros {
 
     private static final Calendar fecha = Calendar.getInstance();
-    public static final File CLIENTES = new File(String.format("src/Documentos/Clientes_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File CLIENTESAMP = new File(String.format("src/Documentos/ClientesAmp_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File SALDOA0 = new File(String.format("src/Documentos/Saldo0_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File DEBITO = new File(String.format("src/Documentos/debito_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File CREDITO = new File(String.format("src/Documentos/Credito_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File ROBINSON = new File(String.format("src/Documentos/Robinson_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
-    public static final File VIP = new File(String.format("src/Documentos/VIP_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR)));
+    public static final String SALDO0 = "src/Documentos/Saldo0_%S_%S_%S.dat".formatted(fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+
+    public static final File CLIENTESSALDO0 = new File(SALDO0);
+    public static final String DEBITO = "src/Documentos/Debito_%S_%S_%S.dat".formatted(fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+
+    public static final File CLIENTESDEBITO = new File(DEBITO);
+    public static final String CREDITO = "src/Documentos/Credito_%S_%S_%S.dat".formatted(fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+
+    public static final File CLIENTESCREDITO = new File(CREDITO);
+    public static final String ROBINSON = "src/Documentos/Robinson_%S_%S_%S.dat".formatted(fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+
+    public static final File CLIENTESROBINSON = new File(ROBINSON);
+    public static final String VIP = "src/Documentos/VIP_%S_%S_%S.dat".formatted(fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
+
+    public static final File CLIENTESVIP = new File(VIP);
+
+    private static ObjectInputStream leer = null;
+    private static ObjectOutputStream escribir = null;
     private static Scanner s;
 
     public static void saldoA0(){
-        Ficheros.leerClientes();
-        ObjectInputStream lectura = null;
-        ObjectOutputStream salida = null;
+        FicherosClientes.leerClientes();
         Clientes cliente;
-        if (!SALDOA0.exists()) {
+        if (!CLIENTESSALDO0.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream(String.format("src/Documentos/ClientesAmp_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR))));
-                salida = new ObjectOutputStream(new FileOutputStream(String.format("src/Documentos/Saldo0_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR))));
+                abrirFlujosDeDatos(FicherosClientes.CLIENTESNORMAL, SALDO0);
                 do {
-                    cliente = (Clientes) lectura.readObject();
+                    cliente = (Clientes) leer.readObject();
                     if (cliente.getSaldo() == 0) {
-                        salida.writeObject(cliente);
+                        escribir.writeObject(cliente);
                     }
-                } while (lectura.readObject() != null);
+                } while (leer.readObject() != null);
             } catch (ClassNotFoundException e) {
                 System.out.println("Archivo de lectura no encontrado.");
             } catch (IOException e) {
                 System.out.println("Error al leer del archivo.");
             } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
+                cerrarFlujosDeDatos();
             }
         }
     }
 
     public static void clientesCredito(){
-        Ficheros.leerClientes();
-        ObjectInputStream lectura = null;
-        ObjectOutputStream salida = null;
+        FicherosClientes.leerClientes();
         Clientes cliente;
-        if (!CREDITO.exists()) {
+        if (!CLIENTESCREDITO.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream(CLIENTES));
-                salida = new ObjectOutputStream(new FileOutputStream(CREDITO));
+                abrirFlujosDeDatos(FicherosClientes.CLIENTESNORMAL, CREDITO);
                 do {
-                    cliente = (Clientes) lectura.readObject();
+                    cliente = (Clientes) leer.readObject();
                     if (cliente.getSaldo() > 0) {
-                        salida.writeObject(cliente);
+                        escribir.writeObject(cliente);
                     }
-                } while (lectura.readObject() != null);
+                } while (leer.readObject() != null);
             } catch (ClassNotFoundException e) {
                 System.out.println("Archivo de lectura no encontrado.");
             } catch (IOException e) {
                 System.out.println("Error al leer del archivo.");
             } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
+                cerrarFlujosDeDatos();
             }
         }
     }
 
     public static void clientesDebito(){
-        Ficheros.leerClientes();
-        ObjectInputStream lectura = null;
-        ObjectOutputStream salida = null;
+        FicherosClientes.leerClientes();
         Clientes cliente;
-        if (!DEBITO.exists()) {
+        if (!CLIENTESDEBITO.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream(CLIENTES));
-                salida = new ObjectOutputStream(new FileOutputStream(DEBITO));
+                abrirFlujosDeDatos(FicherosClientes.CLIENTESNORMAL, DEBITO);
                 do {
-                    cliente = (Clientes) lectura.readObject();
+                    cliente = (Clientes) leer.readObject();
                     if (cliente.getSaldo() < 0) {
-                        salida.writeObject(cliente);
+                        escribir.writeObject(cliente);
                     }
-                } while (lectura.readObject() != null);
+                } while (leer.readObject() != null);
             } catch (ClassNotFoundException e) {
                 System.out.println("Archivo de lectura no encontrado.");
             } catch (IOException e) {
                 System.out.println("Error al leer del archivo.");
             } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
+                cerrarFlujosDeDatos();
             }
         }
     }
 
     public static void clientesRobinson(){
-        Ficheros.leerClientesAmpliados();
+        FicherosClientes.leerClientesAmpliados();
         int contador=0;
-        ObjectInputStream lectura = null;
-        ObjectOutputStream salida = null;
         Clientes cliente;
-        if (!ROBINSON.exists()) {
+        if (!CLIENTESROBINSON.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream(CLIENTESAMP));
-                salida = new ObjectOutputStream(new FileOutputStream(ROBINSON));
+                abrirFlujosDeDatos(FicherosClientes.CLIENTESAMPLIADOS, ROBINSON);
                 do {
-                    cliente = (Clientes) lectura.readObject();
+                    cliente = (Clientes) leer.readObject();
                     if (cliente.getSaldo() > 0 && cliente.getGastosMedios()>3000) {
-                        salida.writeObject(cliente);
+                        escribir.writeObject(cliente);
                         contador++;
                     }
-                } while (lectura.readObject() != null);
+                } while (leer.readObject() != null);
                 System.out.println(contador);
             } catch (ClassNotFoundException e) {
                 System.out.println("Archivo de lectura no encontrado.");
             } catch (IOException e) {
                 System.out.println("Error al leer del archivo.");
             } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
+                cerrarFlujosDeDatos();
             }
         }
     }
     public static void clientesVip(){
-        Ficheros.leerClientesAmpliados();
+        FicherosClientes.leerClientesAmpliados();
         int contador=0;
-        ObjectInputStream lectura = null;
-        ObjectOutputStream salida = null;
         Clientes cliente;
-        if (!VIP.exists()) {
+        if (!CLIENTESVIP.exists()) {
             try {
-                lectura = new ObjectInputStream(new FileInputStream(CLIENTESAMP));
-                salida = new ObjectOutputStream(new FileOutputStream(VIP));
+                abrirFlujosDeDatos(FicherosClientes.CLIENTESAMPLIADOS, VIP);
                 do {
-                    cliente = (Clientes) lectura.readObject();
+                    cliente = (Clientes) leer.readObject();
                     if (cliente.getSaldo() < 0 && cliente.getIngresosMedios()>3000) {
-                        salida.writeObject(cliente);
+                        escribir.writeObject(cliente);
                         contador++;
                     }
-                } while (lectura.readObject() != null);
+                } while (leer.readObject() != null);
                 System.out.println(contador);
             } catch (ClassNotFoundException e) {
                 System.out.println("Archivo de lectura no encontrado.");
             } catch (IOException e) {
                 System.out.println("Error al leer del archivo.");
             } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
+                cerrarFlujosDeDatos();
             }
         }
     }
-
-    public static Clientes sacarClienteAmpliado(String entrada){
-        String nombre;
-        StringBuilder direccion;
-        s = new Scanner(entrada);
-        ClienteAmpliado cliente = new ClienteAmpliado();
-        cliente.setNumCliente(s.nextInt());
-        nombre = s.next();
-        if (s.hasNext("[a-z]+")){
-            nombre += " " + s.next();
-        }
-        cliente.setNombre(nombre);
-        cliente.setApellido1(s.next());
-        cliente.setApellido2(s.next());
-        cliente.setSaldo(s.nextInt());
-        cliente.setIngresosMedios(s.nextInt());
-        cliente.setGastosMedios(s.nextInt());
-        direccion = new StringBuilder(s.next());
-        while (s.hasNext(Pattern.compile("[^0-9]+"))){
-            direccion.append(" ").append(s.next());
-        }
-        cliente.setDireccion(direccion.toString());
-        cliente.setCodigoPostal(s.nextInt());
-        return cliente;
+    public static void abrirFlujosDeDatos(String entrada, String salida) throws IOException {
+        leer = new ObjectInputStream(new FileInputStream(entrada));
+        escribir = new ObjectOutputStream(new FileOutputStream(salida));
     }
 
-    public static Clientes sacarCliente(String entrada){
-        String nombre;
-        s = new Scanner(entrada);
-        ClienteAmpliado cliente = new ClienteAmpliado();
-        cliente.setNumCliente(s.nextInt());
-        nombre = s.next();
-        if (s.hasNext("[a-z]+")){
-            nombre += " " + s.next();
+    public static void cerrarFlujosDeDatos(){
+        try {
+            if (leer != null) {
+                leer.close();
+            }
+            if (escribir != null) {
+                escribir.close();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al cerrar el archivo de lectura.");
         }
-        cliente.setNombre(nombre);
-        cliente.setApellido1(s.next());
-        cliente.setApellido2(s.next());
-        cliente.setSaldo(s.nextInt());
-        cliente.setIngresosMedios(s.nextInt());
-        cliente.setGastosMedios(s.nextInt());
-        return cliente;
     }
-
-    public static void leerClientesAmpliados(){
-        BufferedReader lectura = null;
-        ObjectOutputStream salida = null;
+    public static void generarTxt() {
+        System.out.println("Introduzca el archivo .dat del que quiere generar un .txt");
+        Scanner s=new Scanner(System.in);
+        String respuesta = s.next();
         String linea;
-        if (!CLIENTESAMP.exists()) {
+        BufferedWriter escribir = null;
             try {
-                lectura = new BufferedReader(new FileReader("src/Documentos/Clientes.txt"));
-                salida = new ObjectOutputStream(new FileOutputStream(String.format("src/Documentos/ClientesAmp_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR))));
-                linea = lectura.readLine();
-                while (linea!=null){
-                    salida.writeObject(sacarCliente(linea));
-                    linea = lectura.readLine();
+                leer = new ObjectInputStream(new FileInputStream("src/Documentos/%S.dat".formatted(respuesta)));
+                escribir = new BufferedWriter(new FileWriter("src/Documentos/%S.txt".formatted(respuesta)));
+                Clientes cliente;
+                cliente = (Clientes) leer.readObject();
+                boolean fin = false;
+                while (!fin){
+                    escribir.write(cliente.toString());
+                    try {
+                        cliente = (Clientes) leer.readObject();
+                    }catch (Exception e) {
+                        fin = true;
+                    }
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Archivo de lectura no encontrado.");
             } catch (IOException e) {
                 System.out.println("Error al leer del archivo.");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
+                cerrarFlujosDeDatos();
             }
-        }
     }
-
-    public static void leerClientes(){
-        BufferedReader lectura = null;
-        ObjectOutputStream salida = null;
-        String linea, clientes = "";
-        clientes = clientes.formatted("src/Documentos/Clientes_%S/%S/%S.dat", fecha.get(Calendar.DATE), (fecha.get(Calendar.MONTH)+1),fecha.get(Calendar.YEAR));
-        if (!CLIENTES.exists()) {
-            try {
-                lectura = new BufferedReader(new FileReader("src/Documentos/Clientes.txt"));
-                salida = new ObjectOutputStream(new FileOutputStream(clientes));
-                linea = lectura.readLine();
-                while (linea!=null){
-                    salida.writeObject(sacarCliente(linea));
-                    linea = lectura.readLine();
-                }
-            } catch (FileNotFoundException e) {
-                System.out.println("Archivo de lectura no encontrado.");
-            } catch (IOException e) {
-                System.out.println("Error al leer del archivo.");
-            } finally {
-                try {
-                    if (lectura != null) {
-                        lectura.close();
-                    }
-                    if (salida != null) {
-                        salida.close();
-                    }
-                } catch (IOException e) {
-                    System.out.println("Error al cerrar el archivo de lectura.");
-                }
-            }
-        }
-    }
-
 }
