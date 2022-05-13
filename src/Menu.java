@@ -23,7 +23,6 @@ public class Menu {
                 case 3 -> Ficheros.clientesDebito();
                 case 4 -> Ficheros.clientesRobinson();
                 case 5 -> Ficheros.clientesVip();
-                case 6 -> Ficheros.generarTxt();
                 default -> salir = true;
             }
         }
