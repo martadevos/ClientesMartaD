@@ -21,32 +21,16 @@ public class Clientes implements Serializable {
         this.gastosMedios = gastosMedios;
     }
 
-    public int getNumCliente() {
-        return numCliente;
-    }
-
     public void setNumCliente(int numCliente) {
         this.numCliente = numCliente;
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getApellido1() {
-        return apellido1;
-    }
-
     public void setApellido1(String apellido1) {
         this.apellido1 = apellido1;
-    }
-
-    public String getApellido2() {
-        return apellido2;
     }
 
     public void setApellido2(String apellido2) {

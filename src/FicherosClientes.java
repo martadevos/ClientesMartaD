@@ -13,23 +13,12 @@ public class FicherosClientes {
     public static ObjectOutputStream escribir = null;
     private static Scanner s;
     public static Clientes sacarClienteAmpliado(String entrada){
-        String nombre;
         StringBuilder direccion;
         s = new Scanner(entrada);
         ClienteAmpliado cliente = new ClienteAmpliado();
-        cliente.setNumCliente(s.nextInt());
-        nombre = s.next();
-        if (s.hasNext("[a-z]+")){
-            nombre += " " + s.next();
-        }
-        cliente.setNombre(nombre);
-        cliente.setApellido1(s.next());
-        cliente.setApellido2(s.next());
-        cliente.setSaldo(s.nextInt());
-        cliente.setIngresosMedios(s.nextInt());
-        cliente.setGastosMedios(s.nextInt());
+        sacarDatosPadre(cliente);
         direccion = new StringBuilder(s.next());
-        while (s.hasNext(Pattern.compile("[^0-9]+"))){
+        while (s.hasNext(Pattern.compile("\\D+"))){
             direccion.append(" ").append(s.next());
         }
         cliente.setDireccion(direccion.toString());
@@ -38,9 +27,14 @@ public class FicherosClientes {
     }
 
     public static Clientes sacarCliente(String entrada){
-        String nombre;
         s = new Scanner(entrada);
-        ClienteAmpliado cliente = new ClienteAmpliado();
+        Clientes cliente = new Clientes();
+        sacarDatosPadre(cliente);
+        return cliente;
+    }
+
+    private static void sacarDatosPadre(Clientes cliente) {
+        String nombre;
         cliente.setNumCliente(s.nextInt());
         nombre = s.next();
         if (s.hasNext("[a-z]+")){
@@ -52,7 +46,6 @@ public class FicherosClientes {
         cliente.setSaldo(s.nextInt());
         cliente.setIngresosMedios(s.nextInt());
         cliente.setGastosMedios(s.nextInt());
-        return cliente;
     }
 
     public static void leerClientesAmpliados(){
